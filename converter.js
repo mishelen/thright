@@ -4,9 +4,10 @@ const ttypes = require('./gen-nodejs/converter_types');
 const transport = thrift.TBufferedTransport;
 const protocol = thrift.TBinaryProtocol;
 
-const connection = thrift.createConnection('localhost', 9090, {
+const connection = thrift.createHttpConnection('tright.herokuapp.com', 443, {
     transport: transport,
-    protocol: protocol
+    protocol: protocol,
+    https: true
 });
 
 const client = thrift.createClient(Converter, connection);
@@ -20,6 +21,7 @@ require('yargs')
     batch.cur2 = argv.currency2;
     
     client.convert(Math.random(), batch, (err, message) => {
+        console.log('inside');
         if (err) {
             console.log(err);
             throw err;

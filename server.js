@@ -8,7 +8,7 @@ const EXCHANGE_API = process.env.EXCHANGE_API || '';
 const PORT = process.env.PORT || 8000;
 oxr.set({ app_id: EXCHANGE_API})
 
-const server = thrift.createServer(Converter, {
+const server = thrift.createWebServer(Converter, {
 
     convert: (logid, {am1, cur1, cur2}, result) => {
         console.log(`converting ${am1} ${cur1} to ${cur2}`);
